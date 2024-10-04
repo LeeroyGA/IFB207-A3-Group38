@@ -16,17 +16,6 @@ html {
     padding: 1rem;
 }
 
-.navbar-brand,
-.footer-title {
-    font-family: "Chakra Petch", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    text-shadow: -2px 2px black;
-}
-
-.nav-item,
-.dropdown,
-.title,
 .form-label,
 .card-nav-link,
 h1,
