@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.navbar-brand, .footer-title {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-shadow: -2px 2px black;
+}
+
+.nav-item,
+.dropdown,
+.title, .card-title,.form-label, .modal-title {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.form-label{
+    font-size: 20px;
+}
+
+.form-control {
+    font-size: 12px;
+}
+
+.card-heading {
+    font-family: "Chakra Petch", sans-serif;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+
+.map-card, .modal-card {
+    background-color: #e5f4e5;
+}
+
+.btn {
+    font-family: "Chakra Petch", sans-serif;
+    transition: box-shadow 0.3s;
+}
+
+.btn:hover{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.event-img {
+    width: 100%;
+    height: auto;
+}
+
+.rounded-image {
+    border-radius: 15px;
+}
+
+.custom-button {
+    padding: 20px 40px;
+}
+
+hr {
+    width: 90%;
+}
+
+.venue-card-img {
+    max-width: 100%;
+    height: auto; 
+    max-height: 350px;
+    object-fit: contain; 
+}
+
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .custom-button {
+        padding: 10px 70px;
+    }
+
+    .event-description {
+        text-align: center;
+    }
+
+    hr {
+        width: 75%;
+    }
+}
