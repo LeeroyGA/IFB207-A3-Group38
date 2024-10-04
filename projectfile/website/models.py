@@ -16,7 +16,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"Name: {self.name}"
 
-
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
