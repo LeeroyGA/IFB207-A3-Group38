@@ -8,7 +8,7 @@ Home - SportsPass
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block header %}
 <div id="heroCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
     <!-- Carousel Indicators -->
     <div class="carousel-indicators">
@@ -46,4 +46,8 @@ Home - SportsPass
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
+
 {% endblock %}
