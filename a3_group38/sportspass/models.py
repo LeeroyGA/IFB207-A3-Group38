@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(255), nullable=False)
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
+    events = db.relationship('Event', backref='organizer')
 
     # string print method
     def __repr__(self):
@@ -29,6 +30,9 @@ class Event(db.Model):
     # ... Create the Comments db.relationship
 	# relation to call event.comments and comment.event
     comments = db.relationship('Comment', backref='event')
+
+    organizer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
 	# string print method
     def __repr__(self):
         return f"Name: {self.name}"
@@ -46,3 +50,16 @@ class Comment(db.Model):
         return f"Comment: {self.text}"
 
 class Order(db.Model):
+    __tablename__ = 'orders'
+    id = db.Column(db.Integer, primary_key=True) 
+    order_date = db.Column(db.DateTime, default=datetime.now())
+    total_amount = db.Column(db.Float, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
+
+    user = db.relationship('User', backref=db.backref('orders'))
+    event = db.relationship('Event', backref=db.backref('orders'))
+
+    def __repr__(self):
+        return f"Order {self.id} | User: {self.user.username} | Event: {event_name} | Total: ${self.total_amount:.2f}"
