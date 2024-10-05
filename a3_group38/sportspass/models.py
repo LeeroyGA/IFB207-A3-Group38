@@ -25,7 +25,7 @@ class Event(db.Model):
     image = db.Column(db.String(400))
     capacity = db.Column(db.Integer, nullable=False)
     comments = db.relationship('Comment', backref='event')
-    event = db.relationship('Order', backref=db.backref('event'))
+    event = db.relationship('Order', backref=('event'))
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
