@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref='user')
     events = db.relationship('Event', backref='organizer')
 
+
     # string print method
     def __repr__(self):
         return f"Name: {self.name}"
@@ -62,4 +63,4 @@ class Order(db.Model):
     event = db.relationship('Event', backref=db.backref('orders'))
 
     def __repr__(self):
-        return f"Order {self.id} | User: {self.user.username} | Event: {event_name} | Total: ${self.total_amount:.2f}"
+        return f"Order {self.id} | User: {self.user.name} | Event: {self.event.name} | Total: ${self.total_amount:.2f}"
