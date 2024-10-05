@@ -9,7 +9,8 @@ class User(db.Model, UserMixin):
     emailid = db.Column(db.String(100), index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment', backref='user')
-    events = db.relationship('Event', backref='organizer')
+    events = db.relationship('Event', backref='user')
+    orders = db.relationship('Order', backref='user')
 
     def __repr__(self):
         return f"Name: {self.name}"
@@ -24,8 +25,9 @@ class Event(db.Model):
     image = db.Column(db.String(400))
     capacity = db.Column(db.Integer, nullable=False)
     comments = db.relationship('Comment', backref='event')
+    event = db.relationship('Order', backref=db.backref('event'))
 
-    organizer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return f"Name: {self.name}"
@@ -47,11 +49,8 @@ class Order(db.Model):
     order_date = db.Column(db.DateTime, default=datetime.now())
     total_amount = db.Column(db.Float, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
-
-    user = db.relationship('User', backref=db.backref('orders'))
-    event = db.relationship('Event', backref=db.backref('orders'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     def __repr__(self):
         return f"Order {self.id} | User: {self.user.name} | Event: {self.event.name} | Total: ${self.total_amount:.2f}"
