@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home - SportsPass
+Home
 {% endblock %}
 
 {% block head %}
@@ -19,35 +19,45 @@ Home - SportsPass
     </div>
 
     <!-- Carousel Inner Content -->
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='img/baseball.jpg') }}" class="d-block w-100 carousel-img"
-                alt="Baseball">
-            <div class="carousel-caption">
-                <h1 class="display-1 fw-bolder text-capitalize">All the Games, All the Tickets, One Place!</h1>
-                <p>From football to basketball, find tickets to every game here, all in one convenient location.</p>
-            </div>
+    <div id="heroCarousel" class="carousel slide mt-4" data-bs-ride="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-item">
-            <img src="{{ url_for('static', filename='img/stadium.jpg') }}" class="d-block w-100 carousel-img"
-                alt="Stadium">
-            <div class="carousel-caption">
-                <h1 class="display-1 fw-bolder text-capitalize">Your Ticket to Unforgettable Sports Moments!</h1>
-                <p>Create lasting memories with friends and family at the biggest games of the year.</p>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='img/baseball.jpg') }}" class="d-block w-100 carousel-img" alt="baseball">
+                <div class="carousel-caption mt-2">
+                    <h1 class="fs-1 display-1 fw-bolder text-capitalize">All the Games, All the Tickets, One Place!
+                    </h1>
+                    <p class="d-none d-md-block">From football to basketball, find tickets to every game here, all
+                        in one convenient location.</p>
+                </div>
             </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ url_for('static', filename='img/boxing.jpg') }}" class="d-block w-100 carousel-img"
-                alt="Boxing">
-            <div class="carousel-caption">
-                <h1 class="display-1 fw-bolder text-capitalize">Don’t Miss the Action! Tickets Selling Fast!</h1>
-                <p>Act now to guarantee your spot in the stands. These seats won't last long!</p>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/stadium.jpg') }}" class="d-block w-100 carousel-img" alt="stadium">
+                <div class="carousel-caption mt-2">
+                    <h1 class="fs-1 display-1 fw-bolder text-capitalize">Your Ticket to Unforgettable Sports
+                        Moments!</h1>
+                    <p class="d-none d-md-block">Create lasting memories with friends and family at the biggest
+                        games of the year.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/boxing.jpg') }}" class="d-block w-100 carousel-img" alt="boxing">
+                <div class="carousel-caption mt-2">
+                    <h1 class="fs-1 display-1 fw-bolder text-capitalize">Don’t Miss the Action! Tickets Selling
+                        Fast!</h1>
+                    <p class="d-none d-md-block">Act now to guarantee your spot in the stands. These seats won't
+                        last long!</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}

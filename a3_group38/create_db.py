@@ -1,4 +1,4 @@
-from travel import db, create_app
+from sportspass import db, create_app
 app = create_app()
 ctx = app.app_context()
 ctx.push()
