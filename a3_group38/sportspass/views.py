@@ -14,3 +14,8 @@ def index():
 def create_event():
     # Your function logic here
     return render_template('eventCreation.html')
+
+@main_bp.route('/bookings')
+def bookings():
+    return render_template('userBooking.html')
+
