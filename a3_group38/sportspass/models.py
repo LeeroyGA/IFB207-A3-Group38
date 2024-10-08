@@ -1,6 +1,7 @@
 from . import db
 from datetime import datetime
 from flask_login import UserMixin
+from sqlalchemy import Enum
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -24,10 +25,15 @@ class Event(db.Model):
     location = db.Column(db.String(200), nullable=False)
     image = db.Column(db.String(400))
     capacity = db.Column(db.Integer, nullable=False)
+    status = db.Column(
+        Enum('open', 'inactive', 'sold out', 'cancelled', name='event_status'),
+        nullable=False,
+        default='open'
+    )
     comments = db.relationship('Comment', backref='event')
-    event = db.relationship('Order', backref=('event'))
+    orders = db.relationship('Order', backref='event')
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f"Name: {self.name}"
@@ -36,7 +42,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(400))
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
@@ -46,10 +52,10 @@ class Comment(db.Model):
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True) 
-    order_date = db.Column(db.DateTime, default=datetime.now())
+    order_date = db.Column(db.DateTime, default=datetime.now)
     total_amount = db.Column(db.Float, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     def __repr__(self):
