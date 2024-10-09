@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, IntegerField, SubmitField, StringField, PasswordField
+from wtforms.fields import TextAreaField, IntegerField, SubmitField, StringField, PasswordField, DateTimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
@@ -7,9 +7,11 @@ ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
 #Create new Event
 class EventForm(FlaskForm):
-  name = StringField('Event', validators=[InputRequired()])
+  name = StringField('Event Title', validators=[InputRequired()])
   description = TextAreaField('Description', 
             validators=[InputRequired()])
+  date = DateTimeField('Event Date', validators=[InputRequired()], format='%d/%m/%Y %I:%M %p')
+  location = StringField('Location', validators=[InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message='Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
@@ -26,6 +28,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
  # this is the registration form
+
 class RegisterForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired()])
     email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
