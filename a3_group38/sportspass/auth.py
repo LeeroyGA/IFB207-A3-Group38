@@ -26,7 +26,7 @@ def register():
             return redirect(url_for('main.index'))
     else:
         return render_template('user.html', form=register, heading='Register')
-
+    
 # this is a hint for a login function
 @auth_bp.route('/login', methods=['GET', 'POST'])
 # view function
@@ -56,8 +56,7 @@ def login():
             flash(error)
     return render_template('user.html', form=login_form, heading='Login')
 
-
-@auth_bp.route('/logout' , methods=['GET'])
+@auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
