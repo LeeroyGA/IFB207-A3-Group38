@@ -32,7 +32,6 @@ class Event(db.Model):
     )
     comments = db.relationship('Comment', backref='event')
     orders = db.relationship('Order', backref='event')
-
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
