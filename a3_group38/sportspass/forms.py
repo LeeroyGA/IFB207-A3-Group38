@@ -11,7 +11,7 @@ class EventForm(FlaskForm):
   description = TextAreaField('Description', 
             validators=[InputRequired()])
   date = DateTimeField('Event Date', validators=[InputRequired()], format='%d/%m/%Y %I:%M %p')
-  location = StringField('Location', validators=[InputRequired()])
+  location = StringField('Location (DD/MM/YYYY hh:mm AM/PM)', validators=[InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message='Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
