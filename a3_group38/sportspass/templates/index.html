@@ -79,7 +79,7 @@ Home
                             </h5>
                             <p class="text">Enjoy a relaxed game of cricket between the Melbourne Mavericks and
                                 Carlton Crusaders.</p>
-                            <a href="#" class="btn btn-success">Go somewhere</a>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ Home
                             <h5 class="title">Amateur Rugby League - Brisbane</h5>
                             <p class="text">Watch the Brisbane Buccaneers take on the Logan Lions in a
                                 competitive local rugby league match.</p>
-                            <a href="#" class="btn btn-success">Go somewhere</a>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ Home
                             <h5 class="title">Suburban AFL - Perth</h5>
                             <p class="text">Experience a local AFL clash between the Perth Predators and
                                 Fremantle Falcons.</p>
-                            <a href="#" class="btn btn-success">Go somewhere</a>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -131,8 +131,8 @@ Home
                     <h5 class="card-title">{{ event.name }}</h5>
                     <p class="card-text">{{ event.description }}</p>
                 </div>
-                <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}"
-                        class="btn btn-danger"> View Details </a></div>
+                <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-danger"> View
+                        Details </a></div>
                 <img class="card-img-top" src="{{ event.image }}" alt="event picture">
             </div>
             {% endfor %}
