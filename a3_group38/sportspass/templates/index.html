@@ -28,8 +28,7 @@ Home
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ url_for('static', filename='img/baseball.jpg') }}" class="d-block w-100 carousel-img"
-                    alt="baseball">
+                <img src="{{ url_for('static', filename='img/baseball.jpg') }}" class="d-block w-100 carousel-img" alt="baseball">
                 <div class="carousel-caption mt-2">
                     <h1 class="fs-1 display-1 fw-bolder text-capitalize">All the Games, All the Tickets, One Place!
                     </h1>
@@ -38,8 +37,7 @@ Home
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ url_for('static', filename='img/stadium.jpg') }}" class="d-block w-100 carousel-img"
-                    alt="stadium">
+                <img src="{{ url_for('static', filename='img/stadium.jpg') }}" class="d-block w-100 carousel-img" alt="stadium">
                 <div class="carousel-caption mt-2">
                     <h1 class="fs-1 display-1 fw-bolder text-capitalize">Your Ticket to Unforgettable Sports
                         Moments!</h1>
@@ -48,8 +46,7 @@ Home
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ url_for('static', filename='img/boxing.jpg') }}" class="d-block w-100 carousel-img"
-                    alt="boxing">
+                <img src="{{ url_for('static', filename='img/boxing.jpg') }}" class="d-block w-100 carousel-img" alt="boxing">
                 <div class="carousel-caption mt-2">
                     <h1 class="fs-1 display-1 fw-bolder text-capitalize">Don’t Miss the Action! Tickets Selling
                         Fast!</h1>
@@ -59,84 +56,171 @@ Home
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
-{% block content %}
-<section id="featuredEvents" class="pt-5">
-    <h2 class="text-center my-5 title">Featured Events</h2>
+    {% block content %}
+    <section id="featuredEvents" class="pt-5">
+        <h2 class="text-center my-5 title">Featured Events</h2>
 
-    <div class="container">
-        <div>
-            <div class="row">
-                <div class="col-lg">
-                    <div class="card mb-4">
-                        <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold
-                            Out</span>
-                        <img src="static/img/cricket.jpg" class="card-img-top" alt="cricket">
-                        <div class="card-body">
-                            <h5 class="title">Sunday Social Cricket - Melbourne
-                            </h5>
-                            <p class="text">Enjoy a relaxed game of cricket between the Melbourne Mavericks and
-                                Carlton Crusaders.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+        <div class="container">
+            <div>
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="card mb-4">
+                            <span
+                                class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold
+                                Out</span>
+                            <img src="static/img/cricket.jpg" class="card-img-top" alt="cricket">
+                            <div class="card-body">
+                                <h5 class="title">Sunday Social Cricket - Melbourne
+                                </h5>
+                                <p class="text">Enjoy a relaxed game of cricket between the Melbourne Mavericks and
+                                    Carlton Crusaders.</p>
+                                <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg">
-                    <div class="card mb-4">
-                        <span
-                            class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
-                        <img src="static/img/rugby1.jpg" class="card-img-top" alt="rugby1">
-                        <div class="card-body">
-                            <h5 class="title">Amateur Rugby League - Brisbane</h5>
-                            <p class="text">Watch the Brisbane Buccaneers take on the Logan Lions in a
-                                competitive local rugby league match.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                    <div class="col-lg">
+                        <div class="card mb-4">
+                            <span
+                                class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                            <img src="static/img/rugby1.jpg" class="card-img-top" alt="rugby1">
+                            <div class="card-body">
+                                <h5 class="title">Amateur Rugby League - Brisbane</h5>
+                                <p class="text">Watch the Brisbane Buccaneers take on the Logan Lions in a
+                                    competitive local rugby league match.</p>
+                                <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg">
-                    <div class="card mb-4">
-                        <span
-                            class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
-                        <img src="static/img/afl.jpg" class="card-img-top" alt="afl">
-                        <div class="card-body">
-                            <h5 class="title">Suburban AFL - Perth</h5>
-                            <p class="text">Experience a local AFL clash between the Perth Predators and
-                                Fremantle Falcons.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                    <div class="col-lg">
+                        <div class="card mb-4">
+                            <span
+                                class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                            <img src="static/img/afl.jpg" class="card-img-top" alt="afl">
+                            <div class="card-body">
+                                <h5 class="title">Suburban AFL - Perth</h5>
+                                <p class="text">Experience a local AFL clash between the Perth Predators and
+                                    Fremantle Falcons.</p>
+                                <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<hr id="lineBreak" class="w-75 mx-auto mt-5">
+    <hr id="lineBreak" class="w-75 mx-auto mt-5">
 
-<section id="allEvents">
-    <h2 class="text-center title">Search all Events</h2>
+    <section id="allEvents">
+        <h2 class="text-center title">Search all Events</h2>
 
-    <div class="container">
-        <input class="form-control mt-4 mb-5 custom-center-search" id="searchInput" type="text"
-            placeholder="Filter by Search...">
+        <div class="container">
+            <input class="form-control mt-4 mb-5 custom-center-search" id="searchInput" type="text"
+                placeholder="Filter by Search...">
 
-        <div class="card-group">
-            {% for event in events %}
-            <div class="card mx-3">
-
-                <div class="card-body">
-                    <h5 class="card-title">{{ event.name }}</h5>
-                    <p class="card-text">{{ event.description }}</p>
+            <div class="row row-cols-1 row-cols-md-2 g-4 mt-5" id="cardDeck">
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                            <h5 class="title">Rugby: NRL - Brisbane Broncos vs. Sydney Roosters</h5>
+                            <p class="text">Top of the table clash in the NRL. Witness the powerhouse showdown
+                                live!</p>
+                            <p class="text"><small class="text-body-secondary">Date: August 21, 2024 Time: 7:00
+                                    PM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/broncos.jpeg" class="card-img-bottom" alt="broncos">
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-danger"> View
-                        Details </a></div>
-                <img class="card-img-top" src="{{ event.image }}" alt="event picture">
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-secondary position-absolute top-0 end-0 custom-badge">Cancelled</span>
+                            <h5 class="title">Netball Club Championships</h5>
+                            <p class="text">Cheer on the Adelaide Avengers as they face off against the Norwood
+                                Knights in the netball club championships.</p>
+                            <p class="text"><small class="text-body-secondary">Date: August 20, 2024 Time: 7:30
+                                    PM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/netball.jpg" class="card-img-bottom" alt="netball">
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                            <h5 class="title">Local Soccer Derby - Sydney</h5>
+                            <p class="text">Witness a thrilling soccer derby between Sydney Serpents and Leichhardt
+                                Lions.</p>
+                            <p class="text"><small class="text-body-secondary">Date: August 22, 2024 Time: 7:50
+                                    PM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/soccer1.jpg" class="card-img-bottom" alt="soccer1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                            <h5 class="title">Junior Rugby Union</h5>
+                            <p class="text">Support the Canberra Cobras Juniors as they compete against the
+                                Tuggeranong Tigers Juniors.
+                            </p>
+                            <p class="text"><small class="text-body-secondary">Date: August 23, 2024 Time:
+                                    10:30 AM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/rugbyunion.jpg" class="card-img-bottom" alt="rugbyunion">
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold
+                                Out</span>
+                            <h5 class="title">Country Football League</h5>
+                            <p class="text">Enjoy a local footy match between the Geelong Giants FC and the
+                                Bellarine Bandits.</p>
+                            <p class="text"><small class="text-body-secondary">Date: August 24, 2024 Time: 5:00
+                                    PM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/afl1.jpeg" class="card-img-bottom" alt="afl1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col card-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <span
+                                class="badge rounded-pill bg-warning position-absolute top-0 end-0 custom-badge">Inactive</span>
+                            <h5 class="title">Community Tennis Tournament</h5>
+                            <p class="text">Watch a local tennis showdown between Hobart Hurricanes Club and
+                                Clarence Comets Club.</p>
+                            <p class="text"><small class="text-body-secondary">Date: August 25, 2024 Time: 7:00
+                                    PM AEST</small>
+                            </p>
+                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <img src="static/img/tennis1.jpg" class="card-img-bottom" alt="tennis1">
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
-{% endblock %}
+    </section>
+
+    {% endblock %}
