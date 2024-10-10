@@ -13,14 +13,16 @@ def register():
     register = RegisterForm()
     if (register.validate_on_submit()==True):
             uname = register.user_name.data
+            fname = register.first_name.data
+            lname = register.last_name.data
             pwd = register.password.data
             email = register.email_id.data
-            user = db.session.scalar(db.select(User).where(User.name==uname))
+            user = db.session.scalar(db.select(User).where(User.username==uname))
             if user:
                 flash('Username already exists, please try another')
                 return redirect(url_for('auth.register'))
             pwd_hash = generate_password_hash(pwd)
-            new_user = User(name=uname, password_hash=pwd_hash, emailid=email)
+            new_user = User(username=uname, firstname=fname, lastname=lname, password_hash=pwd_hash, emailid=email)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('main.index'))
@@ -38,7 +40,7 @@ def login():
         user_name = login_form.user_name.data
         password = login_form.password.data
 
-        user = db.session.scalar(db.select(User).where(User.name == user_name))
+        user = db.session.scalar(db.select(User).where(User.username == user_name))
 
         if not user_name or not password:
             flash('Username and password are required.')

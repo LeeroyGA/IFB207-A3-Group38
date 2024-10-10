@@ -11,7 +11,7 @@ class EventForm(FlaskForm):
   description = TextAreaField('Description', 
             validators=[InputRequired()])
   date = DateTimeField('Event Date', validators=[InputRequired()], format='%d/%m/%Y %I:%M %p')
-  location = StringField('Location (DD/MM/YYYY hh:mm AM/PM)', validators=[InputRequired()])
+  location = StringField('Location', validators=[InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message='Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
@@ -31,6 +31,8 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired()])
+    first_name=StringField("First Name", validators=[InputRequired()])
+    last_name=StringField("Last Name", validators=[InputRequired()])
     email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
     # linking two fields - password should be equal to data entered in confirm
     password=PasswordField("Password", validators=[InputRequired(),
