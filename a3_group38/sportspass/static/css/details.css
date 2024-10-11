@@ -37,9 +37,13 @@
     margin-bottom: 30px;
 }
 
-.event-img {
-    width: 100%;
-    height: auto;
+/* Updated image styling */
+.event-img, .event-image {
+    width: 100%;   /* Ensures the image takes up the full width of its container */
+    height: auto;  /* Maintain the aspect ratio */
+    object-fit: cover;  /* Ensures the image fills the container without distortion */
+    max-height: 350px;  /* Optional: set a max height */
+    margin-right: 20px;  /* Adds spacing between the image and the text */
 }
 
 .rounded-image {
@@ -60,7 +64,6 @@ hr {
     max-height: 350px;
     object-fit: contain; 
 }
-
 
 @media (max-width: 768px) {
     .row {
