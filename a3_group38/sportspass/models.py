@@ -25,6 +25,7 @@ class Event(db.Model):
     description = db.Column(db.String(200))
     date = db.Column(db.DateTime, nullable=False)
     location = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(400))
     capacity = db.Column(db.Integer, nullable=False)
     status = db.Column(
@@ -35,6 +36,8 @@ class Event(db.Model):
     comments = db.relationship('Comment', backref='event')
     orders = db.relationship('Order', backref='event')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    orders = db.relationship('Order', back_populates='event')
 
     def __repr__(self):
         return f"Name: {self.name}"
@@ -54,10 +57,24 @@ class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True) 
     order_date = db.Column(db.DateTime, default=datetime.now)
-    total_amount = db.Column(db.Float, nullable=False)
+    ticket_amount = db.Column(db.Float, nullable=False)
+    total_cost = db.Column(db.Float, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
+    event = db.relationship('Event', back_populates='orders')
+
+    def __init__(self, ticket_amount, event_id, **kwargs):
+        super().__init__(**kwargs)
+        self.ticket_amount = ticket_amount
+        self.event_id = event_id
+
+        if self.event.capacity < ticket_amount:
+            raise ValueError("Not enough tickets available for this event.")
+        
+        self.event.capacity -= ticket_amount
+        self.total_cost = self.ticket_amount * self.event.price
 
     def __repr__(self):
         return f"Order {self.id} | User: {self.user.name} | Event: {self.event.name} | Total: ${self.total_amount:.2f}"
