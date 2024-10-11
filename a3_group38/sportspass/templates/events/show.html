@@ -9,55 +9,120 @@ Details
 {% block content %}
 
 <div class="container-fluid">  
-    <div class="row mt-5 mb-3">  
+    <div class="row mt-5 mb-3 text-center">  
       <div class="col-md-12">  
-        <div class="float-left">  
-          <h1 class="mb-0">{{ event.name }}</h1>  
-          <p>Popular Event</p>  
-        </div>  
- 
-        <div class="float-right text-right">  
-          <h2 id="event-capacity">{{ event.capacity }}</h1>  
-        </div>  
+        <!-- Bold event title -->
+        <h1 class="mb-0 display-4 font-weight-bold">{{ event.name }}</h1>  
+        <!-- Event description -->
+        <p class="lead">{{ event.description }}</p>  
       </div>  
     </div>  
- 
-    <!-- Event --> 
-    <div class="row">  
-      <div class="col-md-12">  
-        <div class="card my-3">  
-          <div class="card-body">  
-            <div class="media">  
-              <img class="align-self-start mr-3" src="{{ event.image }}">  
-              <div class="media-body">  
-                <small class="font-weight-bold text-muted">Stay 2 nights</small>  
-                <h5 class="mt-0">{{ event.name }}</h5>  
-                <p>{{ event.description }}</p>  
-                <a href="#" class="btn btn-danger">Book Now</a>  
-              </div>  
-            </div>  
-          </div>  
-        </div>  
+
+    <!-- Event Image --> 
+    <div class="row mb-4 justify-content-center">  
+      <div class="col-md-12 text-center">  
+        <img class="img-fluid event-image" style="max-width: 100%; height: auto;" src="{{ event.image }}" alt="Event image">
       </div>  
     </div>
+
+    <!-- Venue Location and Capacity on the first line -->
+    <div class="row text-center mb-4">
+      <div class="col-md-6">
+        <p><strong>Venue Location:</strong> {{ event.location }} 
+          <!-- Show/Hide map toggle with nowrap style -->
+          <span style="white-space: nowrap;">
+            <a href="#" id="toggleMap" onclick="toggleMapVisibility()" class="ms-2">Show map</a>
+          </span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Venue Capacity:</strong> {{ event.capacity }}</p>
+      </div>
+    </div>
+
+    <!-- Centered Map -->
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <!-- Map container (hidden by default) centered in its own row -->
+        <div id="mapContainer" style="display: none; margin-top: 10px; text-align: center;">
+          <iframe 
+            src="https://www.google.com/maps?q={{ event.location }}&output=embed" 
+            width="100%" 
+            height="250" 
+            frameborder="0" 
+            style="border:0;"
+            allowfullscreen="" 
+            aria-hidden="false" 
+            tabindex="0">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Date and Time on the second line -->
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <p><strong><i class="fa fa-calendar"></i> Date and Time:</strong> {{ event.date.strftime('%d %B %Y, %I:%M %p') }}</p>
+      </div>
+    </div>
+
+    <!-- Tickets from and Book Tickets button on the third line -->
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <span><strong>Tickets from $25</strong></span> <!-- Adjust price as per your data -->
+        <a href="#" class="btn btn-danger btn-lg ms-3">Book Tickets</a>
+      </div>
+    </div>
+
+    <!-- About this Event Section -->
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3>About this event</h3>
+        <p>This is a brief description or summary about what to expect in this event. You can share event highlights, features, or special guest information here to attract attendees.</p>
+      </div>
+    </div>
+
+    <!-- Event Organizer Information -->
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p><strong>Event organized by {{ event.user.name }}</strong></p>
+      </div>
+    </div>
+
     <hr>
-    <!-- Comments -->  
+
+    <!-- Comments Section -->  
     <div class="row">  
       <div class="col-md-12">  
-        <h2>Comments</h1>  
+        <h2>Comments</h2>  
       </div>  
     </div>  
- 
+
     <div class="row border-bottom"> 
       {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
       
       {% for comment in event.comments %}
       <div class="col-md-12">  
-        <b>{{ comment.user.name }} <span class="ml-2 text-muted">January 2024</span></b>
+        <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime('%d %B %Y, %I:%M %p') }}</span></b>
         <p>{{ comment.text }}</p>  
       </div> 
       {% endfor %} 
     </div>  
-  </div> 
+</div> 
+
+<!-- JavaScript for Toggle Map -->
+<script>
+    function toggleMapVisibility() {
+        var mapContainer = document.getElementById("mapContainer");
+        var toggleLink = document.getElementById("toggleMap");
+        if (mapContainer.style.display === "none") {
+            mapContainer.style.display = "block";
+            toggleLink.innerText = "Hide map";
+        } else {
+            mapContainer.style.display = "none";
+            toggleLink.innerText = "Show map";
+        }
+    }
+</script>
 
 {% endblock %}
