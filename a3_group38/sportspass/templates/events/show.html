@@ -28,34 +28,10 @@ Details
     <!-- Venue Location and Capacity on the first line -->
     <div class="row text-center mb-4">
       <div class="col-md-6">
-        <p><strong>Venue Location:</strong> {{ event.location }} 
-          <!-- Show/Hide map toggle with nowrap style -->
-          <span style="white-space: nowrap;">
-            <a href="#" id="toggleMap" onclick="toggleMapVisibility()" class="ms-2">Show map</a>
-          </span>
-        </p>
+        <p><strong>Venue Location:</strong> {{ event.location }}</p>
       </div>
       <div class="col-md-6">
         <p><strong>Venue Capacity:</strong> {{ event.capacity }}</p>
-      </div>
-    </div>
-
-    <!-- Centered Map -->
-    <div class="row text-center mb-4">
-      <div class="col-md-12">
-        <!-- Map container (hidden by default) centered in its own row -->
-        <div id="mapContainer" style="display: none; margin-top: 10px; text-align: center;">
-          <iframe 
-            src="https://www.google.com/maps?q={{ event.location }}&output=embed" 
-            width="100%" 
-            height="250" 
-            frameborder="0" 
-            style="border:0;"
-            allowfullscreen="" 
-            aria-hidden="false" 
-            tabindex="0">
-          </iframe>
-        </div>
       </div>
     </div>
 
@@ -109,20 +85,5 @@ Details
       {% endfor %} 
     </div>  
 </div> 
-
-<!-- JavaScript for Toggle Map -->
-<script>
-    function toggleMapVisibility() {
-        var mapContainer = document.getElementById("mapContainer");
-        var toggleLink = document.getElementById("toggleMap");
-        if (mapContainer.style.display === "none") {
-            mapContainer.style.display = "block";
-            toggleLink.innerText = "Hide map";
-        } else {
-            mapContainer.style.display = "none";
-            toggleLink.innerText = "Show map";
-        }
-    }
-</script>
 
 {% endblock %}
