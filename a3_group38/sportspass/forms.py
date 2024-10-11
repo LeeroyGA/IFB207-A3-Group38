@@ -10,7 +10,7 @@ class EventForm(FlaskForm):
   name = StringField('Event Title', validators=[InputRequired()])
   description = TextAreaField('Description', 
             validators=[InputRequired()])
-  date = DateTimeField('Event Date', validators=[InputRequired()], format='%d/%m/%Y %I:%M %p')
+  date = DateTimeField('Event Date (DD/MM/YYYY hh:mm AM/PM)', validators=[InputRequired()], format='%d/%m/%Y %I:%M %p')
   location = StringField('Location', validators=[InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message='Image cannot be empty'),
