@@ -3,7 +3,10 @@
 {% from 'bootstrap5/form.html' import render_form %}
 
 {% block title %}
-Details
+Details for {{ event.name }}
+{% endblock %}
+
+{% block head %}
 {% endblock %}
 
 {% block content %}
@@ -14,7 +17,7 @@ Details
         <!-- Bold event title -->
         <h1 class="mb-0 display-4 font-weight-bold">{{ event.name }}</h1>  
         <!-- Event description -->
-        <p class="lead">{{ event.description }}</p>  
+        <p class="lead">Event organized by {{ event.user.username }}</p>  
       </div>  
     </div>  
 
@@ -45,8 +48,8 @@ Details
     <!-- Tickets from and Book Tickets button on the third line -->
     <div class="row text-center mb-4">
       <div class="col-md-12">
-        <span><strong>Tickets from $25</strong></span> <!-- Adjust price as per your data -->
-        <a href="#" class="btn btn-danger btn-lg ms-3">Book Tickets</a>
+        <span><strong>Tickets from ${{ event.price }}</strong></span> <!-- Adjust price as per your data -->
+        <a href="#" class="btn btn-info text-white btn-lg ms-3">Book Tickets</a>
       </div>
     </div>
 
@@ -54,14 +57,7 @@ Details
     <div class="row mb-4">
       <div class="col-md-12">
         <h3>About this event</h3>
-        <p>This is a brief description or summary about what to expect in this event. You can share event highlights, features, or special guest information here to attract attendees.</p>
-      </div>
-    </div>
-
-    <!-- Event Organizer Information -->
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <p><strong>Event organized by {{ event.user.name }}</strong></p>
+        <p>{{event.description}}</p>
       </div>
     </div>
 
