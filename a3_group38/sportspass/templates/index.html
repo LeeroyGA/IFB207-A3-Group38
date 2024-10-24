@@ -69,46 +69,28 @@ Home
     <div class="container">
         <div>
             <div class="row">
+                {% for event in featured_events %}
                 <div class="col-lg">
                     <div class="card mb-4">
-                        <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold
-                            Out</span>
-                        <img src="static/img/cricket.jpg" class="card-img-top" alt="cricket">
+                        {% if event.status == 'sold out' %}
+                        <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold Out</span>
+                        {% elif event.status == 'open' %}
+                        <span class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Open</span>
+                        {% elif event.status == 'inactive' %}
+                        <span class="badge rounded-pill bg-warning position-absolute top-0 end-0 custom-badge">Inactive</span>
+                        {% elif event.status == 'cancelled' %}
+                        <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Cancelled</span>
+                        {% endif %}
+                        
+                        <img src="{{ event.image }}" class="card-img-top" alt="{{ event.name }}">
                         <div class="card-body">
-                            <h5 class="title">Sunday Social Cricket - Melbourne
-                            </h5>
-                            <p class="text">Enjoy a relaxed game of cricket between the Melbourne Mavericks and
-                                Carlton Crusaders.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
+                            <h5 class="title">{{ event.name }}</h5>
+                            <p class="text">{{ event.description }}</p>
+                            <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-success">View Details</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg">
-                    <div class="card mb-4">
-                        <span
-                            class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
-                        <img src="static/img/rugby1.jpg" class="card-img-top" alt="rugby1">
-                        <div class="card-body">
-                            <h5 class="title">Amateur Rugby League - Brisbane</h5>
-                            <p class="text">Watch the Brisbane Buccaneers take on the Logan Lions in a
-                                competitive local rugby league match.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg">
-                    <div class="card mb-4">
-                        <span
-                            class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
-                        <img src="static/img/afl.jpg" class="card-img-top" alt="afl">
-                        <div class="card-body">
-                            <h5 class="title">Suburban AFL - Perth</h5>
-                            <p class="text">Experience a local AFL clash between the Perth Predators and
-                                Fremantle Falcons.</p>
-                            <a href="eventDetails.html" class="btn btn-success">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -9,7 +9,9 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    # events = db.session.scalars(db.select(Event)).all()    
+    # events = db.session.scalars(db.select(Event)).all() 
+
+    featured_events = Event.query.order_by(Event.name).limit(3).all()   
     
     # Get the search query from the request
     search_query = request.args.get('search', '')  # Default is an empty string if no query
@@ -30,6 +32,6 @@ def index():
     events = db.session.scalars(query).all()
 
 
-    return render_template('index.html', events=events, categories=categories)
+    return render_template('index.html', events=events, featured_events=featured_events, categories=categories)
 
 
