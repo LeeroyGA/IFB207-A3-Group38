@@ -11,7 +11,7 @@ main_bp = Blueprint('main', __name__)
 def index():
     # events = db.session.scalars(db.select(Event)).all() 
 
-    featured_events = Event.query.order_by(Event.name).limit(3).all()   
+    featured_events = Event.query.order_by(Event.date).limit(3).all()   
     
     # Get the search query from the request
     search_query = request.args.get('search', '')  # Default is an empty string if no query
