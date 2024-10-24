@@ -150,8 +150,12 @@ Home
                     <!-- If event status needs to be displayed, e.g. Sold Out or Active -->
                     {% if event.status == 'sold out' %}
                     <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold Out</span>
-                    {% elif event.status == 'active' %}
-                    <span class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                    {% elif event.status == 'open' %}
+                    <span class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Open</span>
+                    {% elif event.status == 'inactive' %}
+                    <span class="badge rounded-pill bg-warning position-absolute top-0 end-0 custom-badge">Inactive</span>
+                    {% elif event.status == 'cancelled' %}
+                    <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Cancelled</span>
                     {% endif %}
     
                     <!-- Event Image -->
