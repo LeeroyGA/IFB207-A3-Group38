@@ -116,25 +116,53 @@ Home
 
 <hr id="lineBreak" class="w-75 mx-auto mt-5">
 
-<section id="allEvents" class="mb-5">
+<section id="allEvents">
     <h2 class="text-center title">Search all Events</h2>
 
     <div class="container">
-        <input class="form-control mt-4 mb-5 custom-center-search" id="searchInput" type="text"
-            placeholder="Filter by Search...">
-
-        <div class="card-group">
+        <!-- Add a form around the search input to submit search query -->
+        <form method="GET" action="{{ url_for('main.index') }}">
+            <div class="input-group mb-5">
+                <input class="form-control" id="searchInput" name="search" type="text" placeholder="Filter by Search..." value="{{ request.args.get('search', '') }}">
+                
+                <!-- Category dropdown with dynamic categories -->
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ request.args.get('category', 'Category') }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                    <!-- Set 'All' as the default category -->
+                    <li><a class="dropdown-item" href="#" data-category="all">All</a></li>
+                    {% for category in categories %}
+                    <li><a class="dropdown-item" href="#" data-category="{{ category }}">{{ category }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+    
+            <!-- Add a hidden input to store the selected category -->
+            <input type="hidden" name="category" id="selectedCategory" value="{{ request.args.get('category', 'all') }}">
+        </form>
+    
+        <!-- Event cards will be listed here -->
+        <div class="row">
             {% for event in events %}
-            <div class="card mx-3">
-                <img class="card-img-top" src="{{ event.image }}" alt="event picture">
-                <div class="card-body">
-                    <h5 class="card-title">{{ event.name }}</h5>
-                    <p class="card-text">Description: {{ event.description }}</p>
-                    <p class="card-text">Date: {{ event.date }}</p>
-                    <p class="card-text">Location: {{ event.location }}</p>
+            <div class="col-lg">
+                <div class="card mb-4">
+                    <!-- If event status needs to be displayed, e.g. Sold Out or Active -->
+                    {% if event.status == 'sold out' %}
+                    <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold Out</span>
+                    {% elif event.status == 'active' %}
+                    <span class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Active</span>
+                    {% endif %}
+    
+                    <!-- Event Image -->
+                    <img src="{{ event.image }}" class="card-img-top" alt="event picture">
+    
+                    <div class="card-body">
+                        <h5 class="title">{{ event.name }}</h5>
+                        <p class="text">{{ event.description }}</p>
+                        <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-success">View Details</a>
+                    </div>
                 </div>
-                <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-success"> View
-                        Details </a></div>
             </div>
             {% endfor %}
         </div>
