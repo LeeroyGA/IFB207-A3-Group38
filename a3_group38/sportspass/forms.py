@@ -20,6 +20,7 @@ class EventForm(FlaskForm):
         InputRequired(),
         NumberRange(min=1, message='Capacity must be a positive integer')
     ])
+  category = StringField('Category', validators=[InputRequired()])
   submit = SubmitField("Create")
 
 # creates the login information
