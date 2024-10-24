@@ -28,6 +28,7 @@ class Event(db.Model):
     price = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(400))
     capacity = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(50), nullable=False)  # Add 'category' field
     status = db.Column(
         Enum('open', 'inactive', 'sold out', 'cancelled', name='event_status'),
         nullable=False,
