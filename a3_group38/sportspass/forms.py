@@ -5,7 +5,7 @@ from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
-#Create new Event
+# new event form
 class EventForm(FlaskForm):
   name = StringField('Event Title', validators=[InputRequired()])
   description = TextAreaField('Description', 
@@ -29,8 +29,7 @@ class LoginForm(FlaskForm):
     password=PasswordField("Password", validators=[InputRequired('Enter user password')])
     submit = SubmitField("Login")
 
- # this is the registration form
-
+# this is the registration form
 class RegisterForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired()])
     first_name=StringField("First Name", validators=[InputRequired()])
@@ -44,7 +43,7 @@ class RegisterForm(FlaskForm):
     # submit button
     submit = SubmitField("Register")
 
-#User comment
+# user comment
 class CommentForm(FlaskForm):
   text = TextAreaField('Add Comment', [InputRequired()])
   submit = SubmitField('Post')

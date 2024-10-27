@@ -3,6 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import Enum
 
+# User class
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +19,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"Name: {self.username}"
 
+# Event class
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
@@ -43,6 +45,7 @@ class Event(db.Model):
     def __repr__(self):
         return f"Name: {self.name}"
     
+# Comment class
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
@@ -54,6 +57,7 @@ class Comment(db.Model):
     def __repr__(self):
         return f"Comment: {self.text}"
 
+# Order class
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True) 
@@ -61,11 +65,13 @@ class Order(db.Model):
     ticket_amount = db.Column(db.Float, nullable=False)
     total_cost = db.Column(db.Float, nullable=False)
 
+    # Foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     event = db.relationship('Event', back_populates='orders')
 
+    # Constructor
     def __init__(self, ticket_amount, event_id, **kwargs):
         super().__init__(**kwargs)
         self.ticket_amount = ticket_amount
@@ -76,6 +82,6 @@ class Order(db.Model):
         
         self.event.capacity -= ticket_amount
         self.total_cost = self.ticket_amount * self.event.price
-
+    
     def __repr__(self):
         return f"Order {self.id} | User: {self.user.name} | Event: {self.event.name} | Total: ${self.total_amount:.2f}"

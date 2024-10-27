@@ -16,6 +16,7 @@ def show(id):
     form = CommentForm()    
     return render_template('events/show.html', event=event, form=form)
 
+# create a new event function
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
@@ -48,6 +49,7 @@ def check_upload_file(form):
   fp.save(upload_path)
   return db_upload_path
 
+# comment on an event function
 @eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
 @login_required
 def comment(id):  

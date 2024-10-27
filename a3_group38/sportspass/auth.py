@@ -5,9 +5,9 @@ from .models import User
 from .forms import LoginForm, RegisterForm
 from . import db
 
-# Create a blueprint - make sure all BPs have unique names
 auth_bp = Blueprint('auth', __name__)
 
+# registration function
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     register = RegisterForm()
@@ -29,7 +29,7 @@ def register():
     else:
         return render_template('user.html', form=register, heading='Register')
     
-# this is a hint for a login function
+# login function
 @auth_bp.route('/login', methods=['GET', 'POST'])
 # view function
 def login():
@@ -58,6 +58,7 @@ def login():
             flash(error)
     return render_template('user.html', form=login_form, heading='Login')
 
+# logout function
 @auth_bp.route('/logout')
 @login_required
 def logout():
