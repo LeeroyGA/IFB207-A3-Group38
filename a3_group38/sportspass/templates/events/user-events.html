@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Your Created Events</h2>
+
+    {% if events %}
+    <div class="row mt-4">
+        {% for event in events %}
+        <div class="col-12 mb-4">
+            <div class="card flex-row">
+                <div class="col-md-4">
+                    {% if event.image %}
+                    <img src="{{ event.image }}" class="card-img-left img-fluid stretched-image" alt="{{ event.name }}">
+                    {% endif %}
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p class="card-text">{{ event.description }}</p>
+                        <p><strong>Date:</strong> {{ event.date }}</p>
+                        <p><strong>Status:</strong> {{ event.status }}</p>
+
+                        <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-primary">View Details</a>
+                        <!-- buttons for editing event -->
+                        <a href="{{ url_for('event.update_event', id=event.id) }}" class="btn btn-warning">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center">You haven't created any events yet. <a href="{{ url_for('event.create') }}">Create your first event</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
