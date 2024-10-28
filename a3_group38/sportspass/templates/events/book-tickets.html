@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+Book Tickets for {{ event.name }}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card-body p-4 shadow">
+                <div class="text-center">
+                    <h1>Book Tickets for {{ event.name }}</h1>
+                    <p class="lead">Tickets from ${{ event.price }}</p>
+
+                    <hr>
+
+                    <!-- Event Details -->
+                    <h3>Event Details</h3>
+                    <p><strong>Date:</strong> {{ event.date.strftime('%d %B %Y, %I:%M %p') }}</p>
+                    <p><strong>Location:</strong> {{ event.location }}</p>
+                    <p>{{ event.description }}</p>
+
+                    <hr>
+
+                    <!-- Booking Form -->
+                    <h3>Book Your Tickets</h3>
+                    <form method="POST" action="{{ url_for('event.book_tickets', event_id=event.id) }}">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-3">
+                            {{ form.ticket_amount.label(class="form-label") }}
+                            {{ form.ticket_amount(class="form-control") }}
+                        </div>
+            
+                        <div class="text-center mt-3">
+                            {{ form.submit(class="btn btn-primary btn-lg") }}
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

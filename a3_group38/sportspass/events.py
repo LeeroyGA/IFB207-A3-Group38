@@ -5,6 +5,7 @@ from . import db
 import os
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
+from datetime import datetime
 
 eventbp = Blueprint('event', __name__, url_prefix='/events')
 
@@ -136,4 +137,4 @@ def book_tickets(event_id):
         flash(f'Order placed successfully! Your order ID is {new_order.id}.', 'success')
         return redirect(url_for('event.show', id=event.id))
 
-    return render_template('book_tickets.html', form=form, event=event)
+    return render_template('events/book-tickets.html', form=form, event=event)
