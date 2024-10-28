@@ -43,9 +43,6 @@
 
 .card-body {
     height: 300px;
-}
-
-.card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
