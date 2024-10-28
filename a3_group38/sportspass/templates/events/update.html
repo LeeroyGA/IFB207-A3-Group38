@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Update Event</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.name.label }} {{ form.name() }}</p>
+    <p>{{ form.description.label }} {{ form.description() }}</p>
+    <p>{{ form.date.label }} {{ form.date() }}</p>
+    <p>{{ form.location.label }} {{ form.location() }}</p>
+    <p>{{ form.price.label }} {{ form.price() }}</p>
+    <p>{{ form.capacity.label }} {{ form.capacity() }}</p>
+    <p>{{ form.category.label }} {{ form.category() }}</p>
+    <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}
