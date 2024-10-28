@@ -63,6 +63,13 @@ def comment(id):
         flash('Your comment has been added', 'success')
     return redirect(url_for('event.show', id=id))
 
+# my events function
+@eventbp.route('/my-events')
+@login_required
+def my_events():
+    events = db.session.scalars(db.select(Event).where(Event.user_id == current_user.id)).all()
+    return render_template('events/user-events.html', events=events)
+
 # update event function
 @eventbp.route('/<int:id>/update', methods=['GET', 'POST'])
 @login_required
