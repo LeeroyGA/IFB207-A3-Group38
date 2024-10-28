@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
-from .forms import EventForm, CommentForm, UpdateEventForm, CancelEventForm
+from .models import Event, Comment, Order
+from .forms import EventForm, CommentForm, UpdateEventForm, CancelEventForm, BookTicketForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -107,3 +107,33 @@ def cancel_event(id):
     db.session.commit()
     flash("Event has been cancelled.", "success")
     return redirect(url_for('event.show', id=id))
+
+
+# book tickets
+@eventbp.route('/<int:event_id>/book', methods=['GET', 'POST'])
+@login_required
+def book_tickets(event_id):
+    form = BookTicketForm()
+    event = db.session.scalar(db.select(Event).where(Event.id == event_id))
+
+    if form.validate_on_submit():
+        ticket_amount = form.ticket_amount.data
+        total_cost = event.price * ticket_amount
+        order_date = datetime.now()
+
+        # create a new order
+        new_order = Order(
+            ticket_amount=ticket_amount,
+            total_cost=total_cost,
+            order_date=order_date,
+            user_id=current_user.id,
+            event_id=event.id
+        )
+        # save order
+        db.session.add(new_order)
+        db.session.commit()
+
+        flash(f'Order placed successfully! Your order ID is {new_order.id}.', 'success')
+        return redirect(url_for('event.show', id=event.id))
+
+    return render_template('book_tickets.html', form=form, event=event)

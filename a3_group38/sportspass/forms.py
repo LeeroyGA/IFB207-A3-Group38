@@ -62,3 +62,10 @@ class RegisterForm(FlaskForm):
 class CommentForm(FlaskForm):
     text = TextAreaField('Add Comment', [InputRequired()])
     submit = SubmitField('Post')
+
+# book ticket
+class BookTicketForm(FlaskForm):
+    ticket_amount = IntegerField('Number of Tickets', validators=[
+        InputRequired(), NumberRange(min=1, message="Please book at least one ticket.")
+    ])
+    submit = SubmitField('Book Tickets')
