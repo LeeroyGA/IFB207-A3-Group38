@@ -104,6 +104,7 @@ def cancel_event(id):
         flash("You are not authorized to cancel this event.", "danger")
         return redirect(url_for('event.show', id=id))
     
+    # Check if the event is already inactive
     if event.status == 'inactive':
         flash('This event is inactive and cannot be canceled.', 'danger')
         return redirect(url_for('event.show', id=event.id))
