@@ -10,10 +10,14 @@
 
 .nav-item,
 .dropdown,
-.title {
+.title, .card-title {
     font-family: "Chakra Petch", sans-serif;
     font-weight: 600;
     font-style: normal;
+}
+
+.btn {
+    font-family: "Chakra Petch", sans-serif;
 }
 
 .content-wrapper {

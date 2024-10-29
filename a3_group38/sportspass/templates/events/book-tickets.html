@@ -25,6 +25,7 @@ Book Tickets for {{ event.name }}
                     <h3>Event Details</h3>
                     <p><strong>Date:</strong> {{ event.date.strftime('%d %B %Y, %I:%M %p') }}</p>
                     <p><strong>Location:</strong> {{ event.location }}</p>
+                    <p><strong>Available Tickets:</strong> {{ event.capacity }}</p>
                     <p>{{ event.description }}</p>
 
                     <hr>
