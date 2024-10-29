@@ -9,9 +9,11 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    # events = db.session.scalars(db.select(Event)).all() 
+    # Get the 3 most recent events to feature on the homepage
+    featured_events = Event.query.order_by(Event.date).limit(3).all()
 
-    featured_events = Event.query.order_by(Event.date).limit(3).all()   
+    # Update status for past events
+    Event.update_status_for_past_events()   
     
     # Get the search query from the request
     search_query = request.args.get('search', '')  # Default is an empty string if no query

@@ -49,6 +49,16 @@ class Event(db.Model):
         if self.capacity <= 0:
             self.status = 'sold out'
 
+    # Class method to update status for past events
+    @classmethod
+    def update_status_for_past_events(cls):
+        now = datetime.now()
+        past_events = cls.query.filter(cls.date < now, cls.status != 'cancelled').all()
+        for event in past_events:
+            if event.status != 'inactive':
+                event.status = 'inactive'
+        db.session.commit()
+
 # Comment class
 class Comment(db.Model):
     __tablename__ = 'comments'
