@@ -29,7 +29,7 @@ Booking History
 {% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container my-4">
     <!-- Centered Title -->
     <h2 class="text-center">Booking History</h2>
 
@@ -63,7 +63,7 @@ Booking History
                         <!-- Generate Order ID directly in the template -->
                         <strong>Order ID:</strong> {{ current_user.username[0].upper() }}{{ booking.order_date.strftime('%Y%m%d') }}-{{ booking.id }}<br>
                         <strong>Date Booked:</strong> {{ booking.order_date.strftime('%d %B %Y') }}<br>
-                        <strong>Cost:</strong> ${{ booking.total_cost|int }}<br>
+                        <strong>Total Cost:</strong> ${{ booking.total_cost|int }}<br>
                         <strong>Amount of Tickets:</strong> {{ booking.ticket_amount|int }}
                     </p>
                 </div>
