@@ -11,7 +11,7 @@ eventbp = Blueprint('event', __name__, url_prefix='/events')
 
 @eventbp.route('/<id>')
 def show(id):
-    event = db.session.scalar(db.select(Event).where(Event.id==id))
+    event = db.session.scalar(db.select(Event).where(Event.id == id))
     form = CommentForm()
     return render_template('events/show.html', event=event, form=form)
 
@@ -56,7 +56,7 @@ def check_upload_file(form):
 @login_required
 def comment(id):
     form = CommentForm()
-    event = db.session.scalar(db.select(Event).where(Event.id==id))
+    event = db.session.scalar(db.select(Event).where(Event.id == id))
     if form.validate_on_submit():
         comment = Comment(text=form.text.data, event=event, user=current_user)
         db.session.add(comment)
@@ -109,7 +109,6 @@ def cancel_event(id):
     flash("Event has been cancelled.", "success")
     return redirect(url_for('event.show', id=id))
 
-
 # book tickets
 @eventbp.route('/<int:event_id>/book', methods=['GET', 'POST'])
 @login_required
@@ -120,9 +119,15 @@ def book_tickets(event_id):
     if form.validate_on_submit():
         ticket_amount = form.ticket_amount.data
         total_cost = event.price * ticket_amount
+
+        # Check if enough tickets are available
+        if ticket_amount > event.capacity:
+            flash('Not enough tickets available for this event.', 'warning')
+            return render_template('events/book-tickets.html', form=form, event=event)
+
         order_date = datetime.now()
 
-        # create a new order
+        # Create a new order
         new_order = Order(
             ticket_amount=ticket_amount,
             total_cost=total_cost,
@@ -130,7 +135,14 @@ def book_tickets(event_id):
             user_id=current_user.id,
             event_id=event.id
         )
-        # save order
+
+        # Update event capacity and status
+        event.capacity -= ticket_amount
+        if event.capacity == 0:
+            event.status = 'sold out'  # Automatically mark event as "Sold Out" if no capacity left
+            db.session.add(event)  # Ensure event update is added to session
+
+        # Save the order and commit all changes
         db.session.add(new_order)
         db.session.commit()
 
@@ -138,3 +150,24 @@ def book_tickets(event_id):
         return redirect(url_for('event.show', id=event.id))
 
     return render_template('events/book-tickets.html', form=form, event=event)
+
+
+# booking history function
+@eventbp.route('/booking-history')
+@login_required
+def booking_history():
+    bookings = db.session.scalars(db.select(Order).where(Order.user_id == current_user.id)).all()
+    
+    # Add a custom order ID to each booking dynamically
+    for booking in bookings:
+        # Get the first letter of the user's username
+        first_letter = current_user.username[0].upper()
+
+        # Format the order date as YYYYMMDD
+        date_str = booking.order_date.strftime('%Y%m%d')
+
+        # Use the database `id` to ensure uniqueness
+        booking.custom_order_id = f"{first_letter}{date_str}-{booking.id}"
+
+    return render_template('events/booking-history.html', bookings=bookings)
+
