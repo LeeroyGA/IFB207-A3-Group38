@@ -1,58 +1,72 @@
 {% extends "base.html" %}
 
+{% block title %}Update Event Details - {{event.name}}{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Update Event</h2>
-  <form method="POST">
-    {{ form.hidden_tag() }}
+  <!-- Back Button -->
+  <div class="row justify-content-start mb-3">
+      <div class="col">
+        <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-secondary">Back to {{event.name}} Details</a>
+      </div>
+  </div>
 
-    <!-- Event Name -->
-    <div class="mb-3">
-      <label>{{ form.name.label }}</label>
-      {{ form.name(class="form-control", placeholder="Enter event name") }}
-    </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8 mb-5">
+      <h2 class="text-center mb-4">Update Event</h2>
 
-    <!-- Event Description -->
-    <div class="mb-3">
-      <label>{{ form.description.label }}</label>
-      {{ form.description(class="form-control", placeholder="Enter event description", rows="3") }}
+      <form method="POST">
+        {{ form.hidden_tag() }}
+    
+        <!-- Event Name -->
+        <div class="mb-3">
+          <label>{{ form.name.label }}</label>
+          {{ form.name(class="form-control", placeholder="Enter event name") }}
+        </div>
+    
+        <!-- Event Description -->
+        <div class="mb-3">
+          <label>{{ form.description.label }}</label>
+          {{ form.description(class="form-control", placeholder="Enter event description", rows="3") }}
+        </div>
+    
+        <!-- Event Date -->
+        <div class="mb-3">
+          <label>{{ form.date.label }}</label>
+          {{ form.date(class="form-control", placeholder="Select event date") }}
+        </div>
+    
+        <!-- Event Location -->
+        <div class="mb-3">
+          <label>{{ form.location.label }}</label>
+          {{ form.location(class="form-control", placeholder="Enter event location") }}
+        </div>
+    
+        <!-- Event Price -->
+        <div class="mb-3">
+          <label>{{ form.price.label }}</label>
+          {{ form.price(class="form-control", placeholder="Enter event price") }}
+        </div>
+    
+        <!-- Event Capacity -->
+        <div class="mb-3">
+          <label>{{ form.capacity.label }}</label>
+          {{ form.capacity(class="form-control", placeholder="Enter event capacity") }}
+        </div>
+    
+        <!-- Event Category -->
+        <div class="mb-3">
+          <label>{{ form.category.label }}</label>
+          {{ form.category(class="form-select") }}  <!-- Using form-select for dropdowns -->
+        </div>
+    
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+          {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </form>
     </div>
-
-    <!-- Event Date -->
-    <div class="mb-3">
-      <label>{{ form.date.label }}</label>
-      {{ form.date(class="form-control", placeholder="Select event date") }}
-    </div>
-
-    <!-- Event Location -->
-    <div class="mb-3">
-      <label>{{ form.location.label }}</label>
-      {{ form.location(class="form-control", placeholder="Enter event location") }}
-    </div>
-
-    <!-- Event Price -->
-    <div class="mb-3">
-      <label>{{ form.price.label }}</label>
-      {{ form.price(class="form-control", placeholder="Enter event price") }}
-    </div>
-
-    <!-- Event Capacity -->
-    <div class="mb-3">
-      <label>{{ form.capacity.label }}</label>
-      {{ form.capacity(class="form-control", placeholder="Enter event capacity") }}
-    </div>
-
-    <!-- Event Category -->
-    <div class="mb-3">
-      <label>{{ form.category.label }}</label>
-      {{ form.category(class="form-select") }}  <!-- Using form-select for dropdowns -->
-    </div>
-
-    <!-- Submit Button -->
-    <div class="text-center mt-4">
-      {{ form.submit(class="btn btn-primary") }}
-    </div>
-  </form>
+  </div>
 </div>
 {% endblock %}
 
