@@ -11,6 +11,9 @@ def index():
     current_date = datetime.now()
     featured_events = Event.query.filter(Event.date >= current_date).order_by(Event.date.asc()).limit(3).all()
 
+    # Update status for capacity
+    Event.update_status_for_capacity()
+
     # Update status for past events
     Event.update_status_for_past_events()   
     

@@ -49,6 +49,16 @@ class Event(db.Model):
         if self.capacity <= 0:
             self.status = 'sold out'
 
+    @classmethod
+    def update_status_for_capacity(cls):
+        events = cls.query.all()  # Get all events
+        for event in events:
+            # Check capacity for open/sold out status
+            if event.capacity <= 0:
+                event.status = 'sold out'
+            elif event.capacity > 0 and event.status == 'sold out':
+                event.status = 'open'
+
     # Class method to update status for past events
     @classmethod
     def update_status_for_past_events(cls):
