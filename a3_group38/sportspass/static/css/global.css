@@ -16,7 +16,6 @@
     font-style: normal;
 }
 
-
 .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -27,4 +26,13 @@
     margin-top: auto;
 }
 
+/* Added .view-details styling */
+.view-details {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
 
+.view-details:hover {
+    color: #0056b3;
+}
