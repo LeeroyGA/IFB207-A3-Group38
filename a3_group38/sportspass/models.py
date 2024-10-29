@@ -87,3 +87,4 @@ class Order(db.Model):
 
     def __repr__(self):
         return f"Order(id={self.id}, ticket_amount={self.ticket_amount}, total_cost={self.total_cost})"
+
