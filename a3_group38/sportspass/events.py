@@ -103,6 +103,10 @@ def cancel_event(id):
     if event.user_id != current_user.id:
         flash("You are not authorized to cancel this event.", "danger")
         return redirect(url_for('event.show', id=id))
+    
+    if event.status == 'inactive':
+        flash('This event is inactive and cannot be canceled.', 'danger')
+        return redirect(url_for('event.show', id=event.id))
 
     event.status = 'cancelled'
     db.session.commit()
