@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Booking History
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+<style>
+    .card-img-container {
+        background-color: #c9e3cb; /* Slightly darker green than the card background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+    }
+
+    .card-img-top {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Centered Title -->
+    <h2 class="text-center">Booking History</h2>
+
+    <div class="row mt-4">
+        {% for booking in bookings %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card mb-4 position-relative shadow-sm">
+                
+                <!-- Status Badge -->
+                {% if booking.event.status == 'sold out' %}
+                <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Sold Out</span>
+                {% elif booking.event.status == 'open' %}
+                <span class="badge rounded-pill bg-primary position-absolute top-0 end-0 custom-badge">Open</span>
+                {% elif booking.event.status == 'inactive' %}
+                <span class="badge rounded-pill bg-warning position-absolute top-0 end-0 custom-badge">Inactive</span>
+                {% elif booking.event.status == 'cancelled' %}
+                <span class="badge rounded-pill bg-danger position-absolute top-0 end-0 custom-badge">Cancelled</span>
+                {% endif %}
+                
+                <!-- Event Image with Consistent Background -->
+                {% if booking.event.image %}
+                <div class="card-img-container">
+                    <img src="{{ booking.event.image }}" class="card-img-top" alt="{{ booking.event.name }}">
+                </div>
+                {% endif %}
+                
+                <!-- Card Body with Light Green Background -->
+                <div class="card-body" style="background-color: #e9f7e1;">
+                    <h5 class="card-title">{{ booking.event.name }}</h5>
+                    <p class="card-text">
+                        <!-- Generate Order ID directly in the template -->
+                        <strong>Order ID:</strong> {{ current_user.username[0].upper() }}{{ booking.order_date.strftime('%Y%m%d') }}-{{ booking.id }}<br>
+                        <strong>Date Booked:</strong> {{ booking.order_date.strftime('%d %B %Y') }}<br>
+                        <strong>Cost:</strong> ${{ booking.total_cost|int }}<br>
+                        <strong>Amount of Tickets:</strong> {{ booking.ticket_amount|int }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
