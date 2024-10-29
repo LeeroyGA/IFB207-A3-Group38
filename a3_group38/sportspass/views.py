@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from .models import Event
-
-#from .models import Destination
-from .models import User
+from datetime import datetime
 from . import db
 
 main_bp = Blueprint('main', __name__)
@@ -10,7 +8,8 @@ main_bp = Blueprint('main', __name__)
 @main_bp.route('/')
 def index():
     # Get the 3 most recent events to feature on the homepage
-    featured_events = Event.query.order_by(Event.date).limit(3).all()
+    current_date = datetime.now()
+    featured_events = Event.query.filter(Event.date >= current_date).order_by(Event.date.asc()).limit(3).all()
 
     # Update status for past events
     Event.update_status_for_past_events()   
