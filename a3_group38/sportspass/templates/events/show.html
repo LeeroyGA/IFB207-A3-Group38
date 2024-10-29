@@ -13,84 +13,82 @@ Details for {{ event.name }}
 
 <div class="container-fluid">  
     <div class="row mt-5 mb-3 justify-content-center text-center">  
-      <div class="col-md-8">  
-        <!-- Bold event title -->
-        <h1 class="mb-0 display-4 font-weight-bold">{{ event.name }}</h1>  
-        <!-- Event description -->
-        <p class="lead">Event organized by {{ event.user.username }}</p>  
+        <div class="col-md-8">  
+            <!-- Bold event title -->
+            <h1 class="mb-0 display-4 font-weight-bold">{{ event.name }}</h1>  
+            <!-- Event description -->
+            <p class="lead">Event organized by {{ event.user.username }}</p>  
 
-        <!-- Update and cancell Event Button for Owner -->
-        {% if current_user.is_authenticated and current_user.id == event.user_id and event.status != 'cancelled' %}
-        <a href="{{ url_for('event.update_event', id=event.id) }}" class="btn btn-warning mt-3">Update Event</a>
-        <form action="{{ url_for('event.cancel_event', id=event.id) }}" method="POST" style="display:inline;">
-            <button type="submit" class="btn btn-danger mt-3" onclick="return confirm('Are you sure you want to cancel this event?');">Cancel Event</button>
-        </form>
-      </div>  
+            <!-- Update and Cancel Event Button for Owner -->
+            {% if current_user.is_authenticated and current_user.id == event.user_id and event.status != 'cancelled' %}
+            <a href="{{ url_for('event.update_event', id=event.id) }}" class="btn btn-warning mt-3">Update Event</a>
+            <form action="{{ url_for('event.cancel_event', id=event.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger mt-3" onclick="return confirm('Are you sure you want to cancel this event?');">Cancel Event</button>
+            </form>
+            {% elif event.status == 'cancelled' %}
+                <p class="text-danger mt-3">This event has been cancelled.</p>
+            {% endif %}
+        </div>  
     </div>  
-
-{% elif event.status == 'cancelled' %}
-    <p class="text-danger mt-3">This event has been cancelled.</p>
-{% endif %}
-
 
     <!-- Event Image --> 
     <div class="row mb-4 justify-content-center">  
-      <div class="col-md-12 text-center">  
-        <img class="img-fluid event-image" style="max-width: 100%; height: auto;" src="{{ event.image }}" alt="Event image">
-      </div>  
+        <div class="col-md-12 text-center">  
+            <img class="img-fluid event-image" style="max-width: 100%; height: auto;" src="{{ event.image }}" alt="Event image">
+        </div>  
     </div>
 
-    <!-- Venue Location and Capacity on the first line -->
+    <!-- Venue Location on the first line -->
     <div class="row text-center mb-4">
-      <div class="col-md-6">
-        <p><strong>Venue Location:</strong> {{ event.location }}</p>
-      </div>
-      <div class="col-md-6">
-        <p><strong>Venue Capacity:</strong> {{ event.capacity }}</p>
-      </div>
+        <div class="col-md-12">
+            <p><strong>Venue Location:</strong> {{ event.location }}</p>
+        </div>
     </div>
 
     <!-- Date and Time on the second line -->
     <div class="row text-center mb-4">
-      <div class="col-md-12">
-        <p><strong><i class="fa fa-calendar"></i> Date and Time:</strong> {{ event.date.strftime('%d %B %Y, %I:%M %p') }}</p>
-      </div>
+        <div class="col-md-12">
+            <p><strong><i class="fa fa-calendar"></i> Date and Time:</strong> {{ event.date.strftime('%d %B %Y, %I:%M %p') }}</p>
+        </div>
     </div>
 
     <!-- Tickets from and Book Tickets button on the third line -->
     <div class="row text-center mb-4">
-      <div class="col-md-12">
-        <span><strong>Tickets from ${{ event.price }}</strong></span> 
-        <a href="{{ url_for('event.book_tickets', event_id=event.id) }}" class="btn btn-info text-white btn-lg ms-3">Book Tickets</a>
-      </div>
+        <div class="col-md-12">
+            <span><strong>Tickets from ${{ event.price }}</strong></span> 
+            <a href="{{ url_for('event.book_tickets', event_id=event.id) }}" class="btn btn-info text-white btn-lg ms-3">Book Tickets</a>
+        </div>
     </div>
 
     <!-- About this Event Section -->
     <div class="row mb-4">
-      <div class="col-md-12">
-        <h3>About this event</h3>
-        <p>{{event.description}}</p>
-      </div>
+        <div class="col-md-12">
+            <h3>About this event</h3>
+            <p>{{ event.description }}</p>
+        </div>
     </div>
 
     <hr>
 
     <!-- Comments Section -->  
     <div class="row">  
-      <div class="col-md-12">  
-        <h2>Comments</h2>  
-      </div>  
+        <div class="col-md-12">  
+            <h2>Comments</h2>  
+        </div>  
     </div>  
 
     <div class="row my-5 border-bottom"> 
-      {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
+        <!-- Comment Form -->
+        {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
       
-      {% for comment in event.comments %}
-      <div class="col-md-12">  
-        <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime('%d %B %Y, %I:%M %p') }}</span></b>
-        <p>{{ comment.text }}</p>  
-      </div> 
-      {% endfor %} 
+        <!-- Display each comment with "Posted by" and username -->
+        {% for comment in event.comments %}
+        <div class="col-md-12 mt-3">  
+            <p class="mb-1">{{ comment.text }}</p>
+            <small class="text-muted">Posted by <b>{{ comment.user.username }}</b> on {{ comment.created_at.strftime('%d %B %Y, %I:%M %p') }}</small>
+        </div> 
+        <hr> <!-- Optional separator between comments -->
+        {% endfor %} 
     </div>  
 </div> 
 
