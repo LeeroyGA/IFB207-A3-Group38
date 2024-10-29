@@ -116,6 +116,10 @@ def book_tickets(event_id):
     form = BookTicketForm()
     event = db.session.scalar(db.select(Event).where(Event.id == event_id))
 
+    if event.status in ['cancelled', 'inactive', 'sold out']:
+        flash('This event is not available for booking.', 'danger')
+        return redirect(url_for('event.show', id=event.id))
+
     if form.validate_on_submit():
         ticket_amount = form.ticket_amount.data
         total_cost = event.price * ticket_amount
@@ -138,9 +142,9 @@ def book_tickets(event_id):
 
         # Update event capacity and status
         event.capacity -= ticket_amount
-        if event.capacity == 0:
-            event.status = 'sold out'  # Automatically mark event as "Sold Out" if no capacity left
-            db.session.add(event)  # Ensure event update is added to session
+        if event.capacity <= 0:
+            event.capacity = 0
+            event.status = 'sold out'
 
         # Save the order and commit all changes
         db.session.add(new_order)

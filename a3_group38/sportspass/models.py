@@ -44,6 +44,10 @@ class Event(db.Model):
 
     def __repr__(self):
         return f"Event(name={self.name}, status={self.status})"
+    
+    def check_and_update_status(self):
+        if self.capacity <= 0:
+            self.status = 'sold out'
 
 # Comment class
 class Comment(db.Model):
