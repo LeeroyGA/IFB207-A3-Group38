@@ -33,5 +33,3 @@ def index():
 
 
     return render_template('index.html', events=events, featured_events=featured_events, categories=categories)
-
-
