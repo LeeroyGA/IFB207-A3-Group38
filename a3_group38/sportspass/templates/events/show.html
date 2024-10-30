@@ -79,7 +79,9 @@ Details for {{ event.name }}
 
     <div class="row my-5 border-bottom"> 
         <!-- Comment Form -->
-        {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
+        <div class="mb-4">
+            {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
+        </div>
       
         <!-- Display each comment with "Posted by" and username -->
         {% for comment in event.comments %}
