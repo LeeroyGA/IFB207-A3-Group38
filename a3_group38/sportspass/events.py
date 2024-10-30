@@ -144,6 +144,11 @@ def book_tickets(event_id):
             user_id=current_user.id,
             event_id=event.id
         )
+        # Add the new order to the database
+        db.session.add(new_order)
+
+        # Refresh the event object
+        db.session.refresh(event)
 
         # Update event capacity and status
         event.capacity -= ticket_amount
@@ -151,8 +156,7 @@ def book_tickets(event_id):
             event.capacity = 0
             event.status = 'sold out'
 
-        # Save the order and commit all changes
-        db.session.add(new_order)
+        #commit all changes
         db.session.commit()
 
         flash(f'Order placed successfully! Your order ID is {new_order.id}.', 'success')
